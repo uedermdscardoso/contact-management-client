@@ -1,0 +1,120 @@
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+  max-width: 1000px;
+  width: 100%;
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.contact-info h2 {
+  font-size: 1.75rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  margin-bottom: 1rem;
+  color: #334155;
+}
+
+.info-item strong {
+  display: block;
+  color: #0f172a;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group {
+  border-color: #3b82f6;
+}
+
+.form-group input.is-invalid,
+.form-group {
+  border-color: #ef4444;
+}
+
+.error-feedback small {
+  color: #ef4444;
+  font-size: 0.8rem;
+}
+
+.alert-success {
+  padding: 0.75rem;
+  background-color: #dcfce7;
+  color: #166534;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Responsividade para telas menores (Tablets e Celulares) */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
