@@ -1,0 +1,42 @@
+<div class="table-container">
+  <div class="table-top">
+	<h2>Contatos</h2>
+	<div class="table-top-fields">
+		<input type="text" id="search" name="search" placeholder="Search">
+		<button id="btn-add" (click)="addContact()">Adicionar</button>
+	</div>
+  </div>
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>E-mail</th>
+        <th>Phone</th>
+        <th>Twitter</th>
+		<th>Skype</th>
+		<th>Attachment</th>
+		<th></th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.name }}</td>
+        <td>{{ usuario.surname }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.phone }}</td>
+        <td>{{ usuario.twitter }}</td>
+        <td>{{ usuario.skype }}</td>
+        <td><button>Download</button></td>
+		<td><button>Update</button></td>
+		<td><button>Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+@if(isDisabledSideSheet) {
+	<app-side-sheet class="disabled-side-sheet"></app-side-sheet>
+} @else {
+	<app-side-sheet class="enabled-side-sheet"></app-side-sheet>
+}

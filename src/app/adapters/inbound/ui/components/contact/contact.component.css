@@ -1,0 +1,123 @@
+.contact-container {
+  display: flex;
+  align-items: right;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #e6453d;
+  min-height: 100vh;
+}
+
+.text-white {
+  color:#ffffff;
+  margin-bottom:15px;
+  margin-top:0;
+  margin-left:0;
+  margin-right:0;
+  padding-left: 3.0rem;
+  padding-right: 3.0rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;	
+}
+
+.contact-form {
+  display: flex;
+  align-items: right;
+  flex-direction: column;
+  padding-left: 3.0rem;
+  padding-right: 3.0rem;
+  height:600px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3b82f6;
+}
+
+.form-group input.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: #ef4444;
+}
+
+.error-feedback small {
+  color: #ef4444;
+  font-size: 0.8rem;
+}
+
+.alert-success {
+  padding: 0.75rem;
+  background-color: #dcfce7;
+  color: #166534;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.submit-btn {
+  width: 100px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.global-submit-btn { 
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-btn:hover {
+  background-color: #2563eb;
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+  background-color: #f8fafc;
+  cursor: pointer;
+}
+
+.file-name {
+  color: #475569;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Responsividade para telas menores (Tablets e Celulares) */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
