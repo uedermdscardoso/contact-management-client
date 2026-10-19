@@ -45,10 +45,12 @@
 
 .btn-add:hover {
   background-color: rgb(7, 7, 123);  
+  transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-add:active {
+  transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -58,9 +60,31 @@
 	margin-right:5px;
 }
 
+.btn-see:hover {
+  background-color: rgb(98, 97, 97);  
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-see:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .btn-download {
 	background-color: green;
 	color: #ffffff;
+}
+
+.btn-download:hover {
+  background-color: rgb(1, 101, 1);  
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-download:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-update {
@@ -68,9 +92,31 @@
 	color: #ffffff;
 }
 
+.btn-update:hover {
+  background-color: rgb(231, 181, 2);  
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-update:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .btn-delete {
 	background-color: red;
 	color: #ffffff;
+}
+
+.btn-delete:hover {
+  background-color: rgb(212, 1, 1);  
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-delete:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
