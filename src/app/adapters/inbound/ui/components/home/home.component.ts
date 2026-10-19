@@ -69,6 +69,28 @@ export class HomeComponent {
 	return this.http.get(`${this.server}/contact/file?filename=${contact.attachmentPath}`, { responseType: 'blob' });
   }
 
+  downloadAttachment(contact: ContactDTO) {
+	this.getFile(contact).subscribe({
+		next: (blob) => {
+		const url = window.URL.createObjectURL(blob);
+		const link = document.createElement('a');
+		link.href = url;
+		
+		const filename = contact.attachmentPath.split('/').pop() || 'arquivo';
+		link.download = filename;
+		
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		
+		window.URL.revokeObjectURL(url);
+		},
+		error: (err) => {
+			console.error('Erro ao baixar o arquivo:', err);
+		}
+	});
+  }
+
   seeFile(contact: ContactDTO) {
 	if(contact.attachmentPath != null && contact.attachmentPath != "") {
 		this.getFile(contact).subscribe({

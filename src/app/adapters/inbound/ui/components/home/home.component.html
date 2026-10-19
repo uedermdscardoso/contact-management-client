@@ -3,12 +3,13 @@
 	<h2>Contatos</h2>
 	<div class="table-top-fields">
 		<input type="text" id="search" name="search" placeholder="Search">
-		<button id="btn-add" (click)="addContact()">Adicionar</button>
+		<button class="btn btn-add" (click)="addContact()">Adicionar</button>
 	</div>
   </div>
   <table class="custom-table">
     <thead>
       <tr>
+		<th>ID</th>
         <th>Name</th>
         <th>Surname</th>
         <th>E-mail</th>
@@ -22,20 +23,25 @@
     </thead>
     <tbody>
       <tr *ngFor="let contact of contacts">
+		<td>{{ contact.id }}</td>
         <td>{{ contact.name }}</td>
         <td>{{ contact.surname }}</td>
         <td>{{ contact.email }}</td>
         <td>{{ contact.phone }}</td>
         <td>{{ contact.twitterLink || 'No Twitter' }}</td>
         <td>{{ contact.skypeContact || 'No Skype' }}</td>
-        <td><button (click)="seeFile(contact)">See</button></td>
-		<td><button>Update</button></td>
-		<td><button (click)="deleteContact(contact.id)">Delete</button></td>
+        <td>@if(contact.attachmentPath) { 
+			<button class="btn btn-see" (click)="seeFile(contact)">See</button>
+			<button class="btn btn-download" (click)="downloadAttachment(contact)">Download</button>
+		} @else {
+			<p>No Attachment</p>
+		}</td>
+		<td><button class="btn btn-update">Update</button></td>
+		<td><button class="btn btn-delete" (click)="deleteContact(contact.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
   <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
-  <!--<pre>{{ contacts | json }}</pre>-->
 </div>
 <app-toast #toastRef></app-toast>
 
