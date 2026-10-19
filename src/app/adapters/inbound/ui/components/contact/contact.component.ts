@@ -85,7 +85,7 @@ export class ContactComponent {
 	var skypeContact: string | undefined = formatContact(this.contactForm.value.skype,'skype:');
 	
 	const userEntity: Contact = {
-      id: crypto.randomUUID(),
+      id: undefined,
       name: this.contactForm.value.name!,
 	  surname: this.contactForm.value.surname!,
       email: this.contactForm.value.email!,
