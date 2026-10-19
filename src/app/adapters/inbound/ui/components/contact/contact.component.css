@@ -7,6 +7,12 @@
   min-height: 100vh;
 }
 
+.icon{
+	width:25px;
+	height:25px;
+	padding:1.0rem;
+}
+
 .text-white {
   color:#ffffff;
   margin-bottom:15px;
@@ -67,7 +73,7 @@
 }
 
 .error-feedback small {
-  color: #ef4444;
+  color: #ffffff;
   font-size: 0.8rem;
 }
 
@@ -109,7 +115,7 @@
 }
 
 .file-name {
-  color: #475569;
+  color: #ffffff;
   font-size: 0.85rem;
   margin-top: 0.25rem;
 }

@@ -21,22 +21,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td>{{ usuario.name }}</td>
-        <td>{{ usuario.surname }}</td>
-        <td>{{ usuario.email }}</td>
-        <td>{{ usuario.phone }}</td>
-        <td>{{ usuario.twitter }}</td>
-        <td>{{ usuario.skype }}</td>
-        <td><button>Download</button></td>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.surname }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.twitterLink || 'No Twitter' }}</td>
+        <td>{{ contact.skypeContact || 'No Skype' }}</td>
+        <td><button (click)="seeFile(contact)">See</button></td>
 		<td><button>Update</button></td>
-		<td><button>Delete</button></td>
+		<td><button (click)="deleteContact(contact.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
+  <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+  <!--<pre>{{ contacts | json }}</pre>-->
 </div>
-@if(isDisabledSideSheet) {
-	<app-side-sheet class="disabled-side-sheet"></app-side-sheet>
-} @else {
-	<app-side-sheet class="enabled-side-sheet"></app-side-sheet>
+<app-toast #toastRef></app-toast>
+
+@if(!isDisabledSideSheet) {
+	<app-side-sheet (closeAll)="makeClose()" (parentContactSelected)="receiveContact($event)"></app-side-sheet>
 }

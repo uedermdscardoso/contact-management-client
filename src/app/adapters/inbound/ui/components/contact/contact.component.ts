@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { SaveContactUseCase } from '../../../../../core/use-cases/save-contact.use-case';
 import { Contact } from '../../../../../core/domain/models/user/contact.model';
 
@@ -12,6 +12,8 @@ import { Contact } from '../../../../../core/domain/models/user/contact.model';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
+	
+  @Output() contactSelected = new EventEmitter<any>();
   private saveContactUseCase = inject(SaveContactUseCase);
 
   contactForm: FormGroup;
@@ -25,11 +27,28 @@ export class ContactComponent {
       name: ['', [Validators.required, Validators.maxLength(15)]],
       surname: ['', [Validators.required, Validators.maxLength(50)]], 
 	  email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      phone: ['', Validators.required, Validators.maxLength(25)],
-	  twitter: ['', Validators.required, Validators.maxLength(20)],
-	  skype: ['', Validators.required, Validators.maxLength(20)],
+      phone: ['', [Validators.required, Validators.maxLength(25)]],
+	  twitter: ['', [Validators.maxLength(20), this.usernameValidator()]],
+	  skype: ['', [Validators.maxLength(20), this.usernameValidator()]],
 	  attachment: [null],
     });
+  }
+  //
+
+  usernameValidator(): ValidatorFn {
+	return (control: AbstractControl): ValidationErrors | null => {
+		const value = control.value;
+		if (!value) {
+			return null;
+		}
+
+		if (value.includes('/') || value.toLowerCase().includes('https') || value.toLowerCase().includes('http') || value.toLowerCase().includes('www')) {
+			return { pattern: true };
+		}
+
+		const regex = /^(?:@)?[A-Za-z0-9_.]{1,20}$/;
+		return regex.test(value) ? null : { pattern: true };
+	};
   }
 
   get f() {
@@ -60,25 +79,29 @@ export class ContactComponent {
       return;
     }
 
-	var twitterLink: string = `https://www.twitter.com/${this.contactForm.value.twitter}`;
-	var skypeContact: string = `skype:${this.contactForm.value.skype}`
+	const formatContact = (value: string | undefined, prefix: string) => value?.trim() ? `${prefix}${value.trim()}` : undefined;
+
+	var twitterLink: string | undefined = formatContact(this.contactForm.value.twitter,'https://www.twitter.com/');
+	var skypeContact: string | undefined = formatContact(this.contactForm.value.skype,'skype:');
 	
-	const newUser: Contact = {
+	const userEntity: Contact = {
       id: crypto.randomUUID(),
       name: this.contactForm.value.name!,
 	  surname: this.contactForm.value.surname!,
       email: this.contactForm.value.email!,
 	  phone: this.contactForm.value.phone,
 	  twitterLink: twitterLink,
-	  skypeContact: skypeContact,
+	  skypeContact: skypeContact
     };
 
 	var file: File = this.contactForm.value.attachment;
 
-	this.saveContactUseCase.execute(newUser, file).subscribe({
-      next: () => {
+	this.saveContactUseCase.execute(userEntity, file).subscribe({
+      next: (newUser: any) => {
     	console.log('New user data:', newUser);
 
+		this.contactSelected.emit(newUser);
+		
         this.successMessage = 'User saved successfully!';
         this.errorMessage = '';
 		this.contactForm.reset();
