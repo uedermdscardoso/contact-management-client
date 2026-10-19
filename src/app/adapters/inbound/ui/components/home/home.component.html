@@ -2,7 +2,11 @@
   <div class="table-top">
 	<h2>Contatos</h2>
 	<div class="table-top-fields">
-		<input type="text" id="search" name="search" placeholder="Search">
+		<input type="text" id="search" name="search" placeholder="Search" 
+			#search [(ngModel)]="text_search" (keyup.enter)="submitSearchValue(search.value)"> 
+		<div class="btn-search">
+			<img src="assets/icons/search.png" alt="Search" class="icon" (click)="submitSearchValue(search.value)">
+		</div>
 		<button class="btn btn-add" (click)="addContact()">Adicionar</button>
 	</div>
   </div>
@@ -22,23 +26,26 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let contact of contacts">
-		<td>{{ contact.id }}</td>
-        <td>{{ contact.name }}</td>
-        <td>{{ contact.surname }}</td>
-        <td>{{ contact.email }}</td>
-        <td>{{ contact.phone }}</td>
-        <td>{{ contact.twitterLink || 'No Twitter' }}</td>
-        <td>{{ contact.skypeContact || 'No Skype' }}</td>
-        <td>@if(contact.attachmentPath) { 
-			<button class="btn btn-see" (click)="seeFile(contact)">See</button>
-			<button class="btn btn-download" (click)="downloadAttachment(contact)">Download</button>
-		} @else {
-			<p>No Attachment</p>
-		}</td>
-		<td><button class="btn btn-update">Update</button></td>
-		<td><button class="btn btn-delete" (click)="deleteContact(contact.id)">Delete</button></td>
-      </tr>
+	 @let currentContacts = isSearch ? searchContacts : contacts;
+	 @for (contact of currentContacts; track contact.id) {
+		<tr>
+			<td>{{ contact.id }}</td>
+			<td>{{ contact.name }}</td>
+			<td>{{ contact.surname }}</td>
+			<td>{{ contact.email }}</td>
+			<td>{{ contact.phone }}</td>
+			<td>{{ contact.twitterLink || 'No Twitter' }}</td>
+			<td>{{ contact.skypeContact || 'No Skype' }}</td>
+			<td>@if(contact.attachmentPath) { 
+				<button class="btn btn-see" (click)="seeFile(contact)">See</button>
+				<button class="btn btn-download" (click)="downloadAttachment(contact)">Download</button>
+			} @else {
+				<p>No Attachment</p>
+			}</td>
+			<td><button class="btn btn-update">Update</button></td>
+			<td><button class="btn btn-delete" (click)="deleteContact(contact.id)">Delete</button></td>
+		</tr>
+	 }
     </tbody>
   </table>
   <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>

@@ -5,11 +5,12 @@ import { ContactDTO } from '../../../../../core/domain/models/user/contact-dto.m
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ToastComponent } from '../toast/toast.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, SideSheetComponent, ToastComponent],
+  imports: [CommonModule, FormsModule, SideSheetComponent, ToastComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -22,14 +23,36 @@ export class HomeComponent {
   server: string  = "http://localhost:8082/api";
   isDisabledSideSheet: boolean = true;	
   contacts: ContactDTO[] = [];
+  searchContacts: ContactDTO[] = [];
   errorMessage: string = '';
-  
+  text_search: string = '';
+  isSearch: boolean = false;
+
   constructor(
     private cdr: ChangeDetectorRef
   ) {}
   
   ngOnInit(): void {
     this.loadContacts();
+  }
+
+  submitSearchValue(value: string) {
+	if(value == undefined || value == '') {
+		this.isSearch = false;
+		this.cdr.detectChanges();
+	} else {
+		this.http.get<ContactDTO[]>(`${this.server}/contact/value/${value}`).subscribe({
+			next: (contacts: ContactDTO[]) => {
+				this.isSearch = true;
+				this.searchContacts = [...contacts];
+				this.cdr.detectChanges();
+			},
+			error: (err) => {
+				console.error('Error loading contacts', err);
+				this.errorMessage = 'Unable to load contacts.';
+			}
+		});
+	}
   }
 
   makeClose(): void {
