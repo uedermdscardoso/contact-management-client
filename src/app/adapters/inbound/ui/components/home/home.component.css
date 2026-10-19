@@ -84,11 +84,3 @@ h2 {
   background-color: #f8d7da;
   color: #721c24;
 }
-
-.disabled-side-sheet {
-	display:none;
-}
-
-.enabled-side-sheet {
-	display:block;
-}

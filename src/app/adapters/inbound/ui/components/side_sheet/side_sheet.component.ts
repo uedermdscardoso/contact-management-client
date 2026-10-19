@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactComponent } from '../contact/contact.component';
 
@@ -10,5 +10,19 @@ import { ContactComponent } from '../contact/contact.component';
   styleUrls: ['./side_sheet.component.css']
 })
 export class SideSheetComponent {
+  
+  @Output() parentContactSelected = new EventEmitter<any>();
+  @Output() closeAll = new EventEmitter<void>();
+  
+  isDisabled: boolean = false;
+  
+  disable() {
+	this.isDisabled = !this.isDisabled;
+	this.closeAll.emit();
+  }
+
+  passContact(contact: any) {
+	this.parentContactSelected.emit(contact);
+  }
 
 }

@@ -1,3 +1,6 @@
+@if(!isDisabled){
 <div id="side-sheet">
-	<app-contact></app-contact>
+	<img src="assets/images/close.png" alt="Fechar" class="icon" (click)="disable()">
+	<app-contact (contactSelected)="passContact($event)"></app-contact>
 </div>
+}
